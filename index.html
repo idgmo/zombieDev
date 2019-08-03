@@ -62,6 +62,7 @@ cryptoZombies.events.Transfer({ filter: { _to: userAccount } })
         }
       }
 
+      // Send function to create a Random Zombie
       function createRandomZombie(name) {
         // This is going to take a while, so update the UI to let the user know
         // the transaction has been sent
@@ -80,6 +81,7 @@ cryptoZombies.events.Transfer({ filter: { _to: userAccount } })
         });
       }
 
+      // Send function to feed on CryptoKitty
       function feedOnKitty(zombieId, kittyId) {
         $("#txStatus").text("Eating a kitty. This may take a while...");
         return cryptoZombies.methods.feedOnKitty(zombieId, kittyId)
@@ -93,17 +95,115 @@ cryptoZombies.events.Transfer({ filter: { _to: userAccount } })
         });
       }
 
+      // Send payable function to level up zombie
       function levelUp(zombieId) {
         $("#txStatus").text("Leveling up your zombie...");
         return cryptoZombies.methods.levelUp(zombieId)
         .send({ from: userAccount, value: web3.utils.toWei("0.001", "ether") })
         .on("receipt", function(receipt) {
-          $("#txStatus").text("Power overwhelming! Zombie successfully leveled up");
+          $("#txStatus").text("Power overwhelming! Zombie successfully leveled up!");
         })
         .on("error", function(error) {
           $("#txStatus").text(error);
         });
       }
+
+// Fix: function currently displays victory text regardless of outcome.
+      // Send function attack an opponent's zombie
+      function attack(zombieId, targetId) {
+        $("#txStatus").text("Searching for target...");
+        return cryptoZombies.methods.attack(zombieId, targetId)
+        .send({ from: userAccount})
+        .on("receipt", function(receipt) {
+          $("#txStatus").text("Defeated your target and spawned a new Zombie!");
+          getZombiesByOwner(userAccount).then(displayZombies);
+        });
+        .on("error", function(error) {
+          $("#txStatus").text(error);
+        }
+      } 
+
+      // Send function to change name of a zombie
+      function changeName(zombieId, newName) {
+        $("#txStatus").text("Changing zombie's name...");
+        return cryptoZombies.methods.changeName(zombieId, newName)
+        .send({ from: userAccount})
+        .on("receipt", function(receipt) {
+          $("#txStatus").text("Congratulations, your zombie's new name is" + newName + "!");
+        });
+        .on("error", function(error) {
+          $("#txStatus").text(error);
+        }
+      } 
+
+      // Send function to change DNA of a zombie
+      function changeDna(zombieId, newDna) {
+        $("#txStatus").text("Changing zombie's DNA...");
+        return cryptoZombies.methods.changeDna(zombieId, newDna)
+        .send({ from: userAccount})
+        .on("receipt", function(receipt) {
+          $("#txStatus").text("Congratulations on your zombie's new DNA!");
+        });
+        .on("error", function(error) {
+          $("#txStatus").text(error);
+        }
+      } 
+
+      // Send function to transfer zombie (ERC 721)
+      function () {
+        $("#txStatus").text("...");
+        return cryptoZombies.methods.(zombieId)
+        .send({ from: userAccount})
+        .on("receipt", function(receipt) {
+          $("#txStatus").text("!");
+          getZombiesByOwner(userAccount).then(displayZombies);
+        });
+        .on("error", function(error) {
+          $("#txStatus").text(error);
+        }
+      } 
+
+      // Send function
+      function () {
+        $("#txStatus").text("...");
+        return cryptoZombies.methods.(zombieId)
+        .send({ from: userAccount})
+        .on("receipt", function(receipt) {
+          $("#txStatus").text("!");
+          getZombiesByOwner(userAccount).then(displayZombies);
+        });
+        .on("error", function(error) {
+          $("#txStatus").text(error);
+        }
+      } 
+
+      // Send function
+      function () {
+        $("#txStatus").text("...");
+        return cryptoZombies.methods.(zombieId)
+        .send({ from: userAccount})
+        .on("receipt", function(receipt) {
+          $("#txStatus").text("!");
+          getZombiesByOwner(userAccount).then(displayZombies);
+        });
+        .on("error", function(error) {
+          $("#txStatus").text(error);
+        }
+      } 
+
+      // Send function
+      function () {
+        $("#txStatus").text("...");
+        return cryptoZombies.methods.(zombieId)
+        .send({ from: userAccount})
+        .on("receipt", function(receipt) {
+          $("#txStatus").text("!");
+          getZombiesByOwner(userAccount).then(displayZombies);
+        });
+        .on("error", function(error) {
+          $("#txStatus").text(error);
+        }
+      } 
 
       function getZombieDetails(id) {
         return cryptoZombies.methods.zombies(id).call()
